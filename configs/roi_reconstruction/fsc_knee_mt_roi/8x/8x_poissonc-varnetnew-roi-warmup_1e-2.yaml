@@ -1,0 +1,23 @@
+_BASE_: ../default.yaml
+exp_name: tci_fsc_knee_patho=0_8x_poissonc-varnetnew-roi-warmup_1e-2
+init_exp_dir: results/tci_fsc_knee_patho=0_8x_poissonc-varnetnew_1e-2
+init_modules: [sampler, reconstructor]
+init_module_trainability: [True, True]
+lr: 0.01
+model:
+  name: PoissonC-VarNetNew-RoI-Warmup
+  sampler:
+    name: PoissonSampler
+    shape: [192, 192]
+    subsampling_dim: [-2, -1]
+    acceleration: 8
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 64
+    dc_weight: 1
+    adj_dc_weight: True
+train_loss:
+  name: PSNRLoss

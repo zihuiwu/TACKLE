@@ -1,0 +1,13 @@
+data_module:
+  name: FastMRIKneeMultiCoilPathoDataModule
+  shape: [192, 192]
+  batch_size: 1
+  pathologies: [0]
+val_test_loss:
+  name: PSNRLocal
+task: local_recon
+vis_freq: 50
+paper_figure_vis_list: []
+callbacks: 
+  callback1: TestCallback
+  callback2: PaperFigureCallback

@@ -1,0 +1,22 @@
+_BASE_: ../default.yaml
+exp_name: tci_skmtea_label=-1_16x_loupe-bigunet-seg-scratch_1e-3
+lr: 0.001
+model:
+  name: LOUPE-BigUNet-Seg-Finetuned
+  sampler:
+    name: LOUPESampler
+    shape: [512, 512]
+    subsampling_dim: [-2, -1]
+    acceleration: 16
+    line_constrained: False
+    preselect_num: 0
+    preselect_ratio: 128
+  reconstructor:
+    name: ZeroFilledReconstructor
+  predictor:
+    name: UNetMonaiSegmenter
+    spatial_dims: 2
+    in_channels: 1
+    out_channels: 5
+    channels: [128, 256, 512, 1024, 2048]
+    strides: [2, 2, 2, 2]

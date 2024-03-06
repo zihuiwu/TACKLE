@@ -1,0 +1,15 @@
+data_module:
+  name: BratsDataModule
+  shape: [240, 240]
+  noise_std: 0.0005
+  batch_size: 16
+  selected_modality: flair
+  selected_class: 2 # whole tumor
+val_test_loss:
+  name: ClassificationAccuracy
+task: cls
+vis_freq: 2000
+paper_figure_vis_list: []
+callbacks: 
+  callback1: TestCallback
+  callback2: PaperFigureCallback

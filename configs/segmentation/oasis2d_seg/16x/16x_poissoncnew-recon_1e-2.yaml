@@ -1,0 +1,25 @@
+_BASE_: ../default.yaml
+exp_name: tci_oasis2d_label=-1_16x_poissoncnew-recon_1e-2
+task: recon
+lr: 0.01
+model:
+  name: PoissonCNew-Recon
+  sampler:
+    name: PoissonSampler
+    shape: [192, 160]
+    subsampling_dim: [-2, -1]
+    acceleration: 16
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 128
+    dc_weight: 1
+    adj_dc_weight: True
+  predictor:
+    name: IdentityPredictor
+train_loss:
+  name: PSNRLoss
+val_test_loss:
+  name: PSNR

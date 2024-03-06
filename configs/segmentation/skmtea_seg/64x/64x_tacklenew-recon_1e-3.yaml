@@ -1,0 +1,28 @@
+_BASE_: ../default.yaml
+exp_name: tci_skmtea_label=-1_64x_tacklenew-recon_1e-3
+task: recon
+lr: 0.001
+model:
+  name: TackleNew-Recon
+  sampler:
+    name: LOUPESampler
+    shape: [512, 512]
+    subsampling_dim: [-2, -1]
+    acceleration: 64
+    line_constrained: False
+    preselect_num: 0
+    preselect_ratio: 512
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 512
+    dc_weight: 1
+    adj_dc_weight: True
+  predictor:
+    name: IdentityPredictor
+train_loss:
+  name: PSNRLoss
+val_test_loss:
+  name: PSNR

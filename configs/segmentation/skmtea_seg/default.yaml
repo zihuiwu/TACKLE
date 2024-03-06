@@ -1,0 +1,29 @@
+exp_name: skmtea_multicoil_label=-1
+procedure:
+  name: TrainValTest
+task: seg
+trainer:
+  max_epochs: 1000
+patience: 10
+callbacks: [TestCallback, PaperFigureCallback]
+lr: 0.001
+logger:
+  project: mri_codesign
+data_module:
+  name: SkmTeaDataModule
+  shape: [512, 512]
+  batch_size: 4
+  selected_class: -1
+vis_freq: 50
+model:
+  name: TBD
+  sampler:
+    name: TBD
+  reconstructor:
+    name: TBD
+  predictor:
+    name: TBD
+train_loss:
+  name: DiceMonaiLoss
+val_test_loss:
+  name: DiceMonai

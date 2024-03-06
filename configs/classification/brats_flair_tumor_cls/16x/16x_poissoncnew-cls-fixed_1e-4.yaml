@@ -1,0 +1,29 @@
+_BASE_: ../default.yaml
+exp_name: tci_brats_flair_label=wt_16x_poissoncnew-cls-fixed_1e-4
+init_exp_dir: results/tci_brats_flair_label=wt_16x_poissoncnew-recon_1e-2
+init_modules: [sampler, reconstructor]
+init_module_trainability: [False, False]
+lr: 0.0001
+model:
+  name: PoissonCNew-Cls-Fixed
+  sampler:
+    name: PoissonSampler
+    shape: [240, 240]
+    subsampling_dim: [-2, -1]
+    acceleration: 16
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 128
+    dc_weight: 1
+    adj_dc_weight: True
+  predictor:
+    name: ResNet18Classifier
+    in_chans: 1
+    num_classes: 2
+train_loss:
+  name: CrossEntropyLoss
+val_test_loss:
+  name: ClassificationAccuracy

@@ -1,0 +1,24 @@
+_BASE_: ../default.yaml
+exp_name: tci_fmc_knee_patho=0_16x_tacklenew-roi_1e-3
+init_exp_dir: results/tci_fmc_knee_patho=0_16x_tacklenew-full_1e-2
+init_modules: [sampler, reconstructor]
+init_module_trainability: [True, True]
+lr: 0.001
+model:
+  name: TackleNew-RoI
+  sampler: 
+    name: LOUPESampler
+    shape: [192, 192]
+    subsampling_dim: [-2, -1]
+    acceleration: 16
+    line_constrained: False
+    preselect_num: 0
+    preselect_ratio: 128
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 128
+    dc_weight: 1
+    adj_dc_weight: True

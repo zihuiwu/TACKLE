@@ -1,0 +1,14 @@
+data_module:
+  name: OASIS2dDataModule
+  shape: [192, 160]
+  noise_std: 0.0005
+  batch_size: 16
+  selected_class: -1
+val_test_loss:
+  name: DiceMonai
+task: seg
+vis_freq: 1000
+paper_figure_vis_list: []
+callbacks: 
+  callback1: TestCallback
+  callback2: PaperFigureCallback

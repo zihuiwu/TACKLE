@@ -1,0 +1,29 @@
+exp_name: fastmri_knee_multicoil_patho=0
+procedure:
+  name: TrainValTest
+task: local_recon
+trainer:
+  max_epochs: 1000
+patience: 10
+callbacks: [TestCallback, PaperFigureCallback]
+lr: 0.01
+logger:
+  project: mri_codesign
+data_module:
+  name: FastMRIKneeMultiCoilPathoDataModule
+  shape: [192, 192]
+  batch_size: 24
+  pathologies: [0]
+vis_freq: 25
+model:
+  name: LOUPE
+  sampler:
+    name: TBD
+  reconstructor:
+    name: TBD
+  predictor:
+    name: IdentityPredictor
+train_loss:
+  name: PSNRLocalLoss
+val_test_loss:
+  name: PSNRLocal

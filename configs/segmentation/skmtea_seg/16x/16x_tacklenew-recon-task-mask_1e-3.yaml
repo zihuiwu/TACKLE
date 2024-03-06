@@ -1,0 +1,31 @@
+_BASE_: ../default.yaml
+exp_name: tci_skmtea_label=-1_16x_tacklenew-recon-task-mask_1e-3
+init_exp_dir: results/tci_skmtea_label=-1_16x_tacklenew-seg-ft_1e-3
+init_modules: [sampler]
+init_module_trainability: [False]
+task: recon
+lr: 0.001
+model:
+  name: TackleNew-Recon-Task-Mask
+  sampler:
+    name: LOUPESampler
+    shape: [512, 512]
+    subsampling_dim: [-2, -1]
+    acceleration: 16
+    line_constrained: False
+    preselect_num: 0
+    preselect_ratio: 128
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 128
+    dc_weight: 1
+    adj_dc_weight: True
+  predictor:
+    name: IdentityPredictor
+train_loss:
+  name: PSNRLoss
+val_test_loss:
+  name: PSNR

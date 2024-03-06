@@ -1,0 +1,23 @@
+_BASE_: ../default.yaml
+exp_name: tci_brats_flair_label=wt_64x_loupe-bigresnet-cls-scratch_1e-2
+lr: 0.01
+model:
+  name: LOUPE-BigResNet-Cls-Finetuned
+  sampler:
+    name: LOUPESampler
+    shape: [240, 240]
+    subsampling_dim: [-2, -1]
+    acceleration: 64
+    line_constrained: False
+    preselect_num: 0
+    preselect_ratio: 512
+  reconstructor:
+    name: ZeroFilledReconstructor
+  predictor:
+    name: ResNet101Classifier
+    in_chans: 1
+    num_classes: 2
+train_loss:
+  name: CrossEntropyLoss
+val_test_loss:
+  name: ClassificationAccuracy

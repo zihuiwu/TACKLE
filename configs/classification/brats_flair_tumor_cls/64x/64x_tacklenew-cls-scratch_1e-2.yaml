@@ -1,0 +1,29 @@
+_BASE_: ../default.yaml
+exp_name: tci_brats_flair_label=wt_64x_tacklenew-cls-scratch_1e-2
+lr: 0.01
+model:
+  name: TackleNew-Seg-Scratch
+  sampler: 
+    name: LOUPESampler
+    shape: [240, 240]
+    subsampling_dim: [-2, -1]
+    acceleration: 64
+    line_constrained: False
+    preselect_num: 0
+    preselect_ratio: 512
+  reconstructor:
+    name: VarNetReconstructor
+    num_cascades: 12
+    chans: 18
+    pools: 4
+    acs_ratio: 512
+    dc_weight: 1
+    adj_dc_weight: True
+  predictor:
+    name: ResNet18Classifier
+    in_chans: 1
+    num_classes: 2
+train_loss:
+  name: CrossEntropyLoss
+val_test_loss:
+  name: ClassificationAccuracy

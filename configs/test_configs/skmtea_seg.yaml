@@ -1,0 +1,13 @@
+data_module:
+  name: SkmTeaDataModule
+  shape: [512, 512]
+  batch_size: 4
+  selected_class: -1
+val_test_loss:
+  name: DiceMonai
+task: seg
+vis_freq: 1000
+paper_figure_vis_list: []
+callbacks: 
+  callback1: TestCallback
+  callback2: PaperFigureCallback
